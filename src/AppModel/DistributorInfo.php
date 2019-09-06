@@ -10,14 +10,14 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 分销员审核申请
+ * Class DistributorInfo
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="distributor_info")
  */
-class Admin extends Model
+class DistributorInfo extends Model
 {
     /**
      * 
@@ -29,31 +29,49 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 姓名
+     *
+     * @Column(name="real_name", prop="realName")
+     *
+     * @var string|null
+     */
+    private $realName;
+
+    /**
+     * 手机号
      *
      * @Column()
      *
      * @var string|null
      */
-    private $name;
+    private $phone;
 
     /**
-     * 密码
+     * 上级id
      *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column(name="uppler_id", prop="upplerId")
      *
      * @var int|null
      */
-    private $isSuper;
+    private $upplerId;
+
+    /**
+     * 状态 0 审核中 1：通过 2:拒绝
+     *
+     * @Column()
+     *
+     * @var int|null
+     */
+    private $status;
+
+    /**
+     * 
+     *
+     * @Column(name="user_id", prop="userId")
+     *
+     * @var int|null
+     */
+    private $userId;
 
     /**
      * 创建时间
@@ -82,24 +100,6 @@ class Admin extends Model
      */
     private $deletedAt;
 
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
-
 
     /**
      * @param int $id
@@ -112,33 +112,53 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $realName
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setRealName(?string $realName): void
     {
-        $this->name = $name;
+        $this->realName = $realName;
     }
 
     /**
-     * @param string|null $password
+     * @param string|null $phone
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setPhone(?string $phone): void
     {
-        $this->password = $password;
+        $this->phone = $phone;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param int|null $upplerId
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setUpplerId(?int $upplerId): void
     {
-        $this->isSuper = $isSuper;
+        $this->upplerId = $upplerId;
+    }
+
+    /**
+     * @param int|null $status
+     *
+     * @return void
+     */
+    public function setStatus(?int $status): void
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @param int|null $userId
+     *
+     * @return void
+     */
+    public function setUserId(?int $userId): void
+    {
+        $this->userId = $userId;
     }
 
     /**
@@ -172,26 +192,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -202,25 +202,41 @@ class Admin extends Model
     /**
      * @return string|null
      */
-    public function getName(): ?string
+    public function getRealName(): ?string
     {
-        return $this->name;
+        return $this->realName;
     }
 
     /**
      * @return string|null
      */
-    public function getPassword(): ?string
+    public function getPhone(): ?string
     {
-        return $this->password;
+        return $this->phone;
     }
 
     /**
      * @return int|null
      */
-    public function getIsSuper(): ?int
+    public function getUpplerId(): ?int
     {
-        return $this->isSuper;
+        return $this->upplerId;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getUserId(): ?int
+    {
+        return $this->userId;
     }
 
     /**
@@ -245,22 +261,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

@@ -10,14 +10,14 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 二级分类表
+ * Class Category
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="category")
  */
-class Admin extends Model
+class Category extends Model
 {
     /**
      * 
@@ -29,34 +29,43 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 商品的分类名称
+     *
+     * @Column(name="cate_name", prop="cateName")
+     *
+     * @var string
+     */
+    private $cateName;
+
+    /**
+     * 商品的父级id
+     *
+     * @Column(name="p_id", prop="pId")
+     *
+     * @var int
+     */
+    private $pId;
+
+    /**
+     * 商品的分类排序
      *
      * @Column()
      *
-     * @var string|null
+     * @var int
      */
-    private $name;
+    private $sort;
 
     /**
-     * 密码
+     * 商品的分类是否显示0不显示 1:显示
      *
-     * @Column(hidden=true)
+     * @Column(name="is_show", prop="isShow")
      *
-     * @var string|null
+     * @var int
      */
-    private $password;
+    private $isShow;
 
     /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
-     *
-     * @var int|null
-     */
-    private $isSuper;
-
-    /**
-     * 创建时间
+     * 商品分类的添加时间
      *
      * @Column(name="created_at", prop="createdAt")
      *
@@ -65,7 +74,7 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 商品分类的更新时间
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
@@ -74,7 +83,7 @@ class Admin extends Model
     private $updatedAt;
 
     /**
-     * 删除时间
+     * 商品分类的删除时间
      *
      * @Column(name="deleted_at", prop="deletedAt")
      *
@@ -83,22 +92,13 @@ class Admin extends Model
     private $deletedAt;
 
     /**
-     * 排序
+     * 商品分类的地区管理
      *
-     * @Column()
+     * @Column(name="area_id", prop="areaId")
      *
-     * @var string|null
+     * @var int
      */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
+    private $areaId;
 
 
     /**
@@ -112,33 +112,43 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param string $cateName
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setCateName(string $cateName): void
     {
-        $this->name = $name;
+        $this->cateName = $cateName;
     }
 
     /**
-     * @param string|null $password
+     * @param int $pId
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setPId(int $pId): void
     {
-        $this->password = $password;
+        $this->pId = $pId;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param int $sort
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setSort(int $sort): void
     {
-        $this->isSuper = $isSuper;
+        $this->sort = $sort;
+    }
+
+    /**
+     * @param int $isShow
+     *
+     * @return void
+     */
+    public function setIsShow(int $isShow): void
+    {
+        $this->isShow = $isShow;
     }
 
     /**
@@ -172,23 +182,13 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
+     * @param int $areaId
      *
      * @return void
      */
-    public function setSort(?string $sort): void
+    public function setAreaId(int $areaId): void
     {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
+        $this->areaId = $areaId;
     }
 
     /**
@@ -200,27 +200,35 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getCateName(): ?string
     {
-        return $this->name;
+        return $this->cateName;
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getPassword(): ?string
+    public function getPId(): ?int
     {
-        return $this->password;
+        return $this->pId;
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getIsSuper(): ?int
+    public function getSort(): ?int
     {
-        return $this->isSuper;
+        return $this->sort;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIsShow(): ?int
+    {
+        return $this->isShow;
     }
 
     /**
@@ -248,19 +256,11 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getSort(): ?string
+    public function getAreaId(): ?int
     {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
+        return $this->areaId;
     }
 
 }

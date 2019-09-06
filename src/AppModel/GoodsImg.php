@@ -10,14 +10,14 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 商品副表
+ * Class GoodsImg
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="goods_img")
  */
-class Admin extends Model
+class GoodsImg extends Model
 {
     /**
      * 
@@ -29,34 +29,34 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 商品图片的路径
+     *
+     * @Column(name="img_url", prop="imgUrl")
+     *
+     * @var string
+     */
+    private $imgUrl;
+
+    /**
+     * 商品图片的类型 0:商品图片 1：合同图片
      *
      * @Column()
      *
-     * @var string|null
+     * @var int
      */
-    private $name;
+    private $type;
 
     /**
-     * 密码
+     * 商品id
      *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column(name="good_id", prop="goodId")
      *
      * @var int|null
      */
-    private $isSuper;
+    private $goodId;
 
     /**
-     * 创建时间
+     * 商品图片创建时间
      *
      * @Column(name="created_at", prop="createdAt")
      *
@@ -65,7 +65,7 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 商品图片更新
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
@@ -74,31 +74,13 @@ class Admin extends Model
     private $updatedAt;
 
     /**
-     * 删除时间
+     * 商品删除时间
      *
      * @Column(name="deleted_at", prop="deletedAt")
      *
      * @var string|null
      */
     private $deletedAt;
-
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
 
 
     /**
@@ -112,33 +94,33 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param string $imgUrl
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setImgUrl(string $imgUrl): void
     {
-        $this->name = $name;
+        $this->imgUrl = $imgUrl;
     }
 
     /**
-     * @param string|null $password
+     * @param int $type
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setType(int $type): void
     {
-        $this->password = $password;
+        $this->type = $type;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param int|null $goodId
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setGoodId(?int $goodId): void
     {
-        $this->isSuper = $isSuper;
+        $this->goodId = $goodId;
     }
 
     /**
@@ -172,26 +154,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -200,27 +162,27 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getImgUrl(): ?string
     {
-        return $this->name;
+        return $this->imgUrl;
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getPassword(): ?string
+    public function getType(): ?int
     {
-        return $this->password;
+        return $this->type;
     }
 
     /**
      * @return int|null
      */
-    public function getIsSuper(): ?int
+    public function getGoodId(): ?int
     {
-        return $this->isSuper;
+        return $this->goodId;
     }
 
     /**
@@ -245,22 +207,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

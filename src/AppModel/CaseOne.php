@@ -10,17 +10,17 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 一级分类主表
+ * Class CaseOne
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="case_one")
  */
-class Admin extends Model
+class CaseOne extends Model
 {
     /**
-     * 
+     * 分类id
      * @Id()
      * @Column()
      *
@@ -29,31 +29,31 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 分类名称
+     *
+     * @Column(name="case_name", prop="caseName")
+     *
+     * @var string|null
+     */
+    private $caseName;
+
+    /**
+     * 分类图片
+     *
+     * @Column(name="img_src", prop="imgSrc")
+     *
+     * @var string|null
+     */
+    private $imgSrc;
+
+    /**
+     * 
      *
      * @Column()
      *
-     * @var string|null
-     */
-    private $name;
-
-    /**
-     * 密码
-     *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
-     *
      * @var int|null
      */
-    private $isSuper;
+    private $type;
 
     /**
      * 创建时间
@@ -82,24 +82,6 @@ class Admin extends Model
      */
     private $deletedAt;
 
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
-
 
     /**
      * @param int $id
@@ -112,33 +94,33 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $caseName
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setCaseName(?string $caseName): void
     {
-        $this->name = $name;
+        $this->caseName = $caseName;
     }
 
     /**
-     * @param string|null $password
+     * @param string|null $imgSrc
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setImgSrc(?string $imgSrc): void
     {
-        $this->password = $password;
+        $this->imgSrc = $imgSrc;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param int|null $type
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setType(?int $type): void
     {
-        $this->isSuper = $isSuper;
+        $this->type = $type;
     }
 
     /**
@@ -172,26 +154,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -202,25 +164,25 @@ class Admin extends Model
     /**
      * @return string|null
      */
-    public function getName(): ?string
+    public function getCaseName(): ?string
     {
-        return $this->name;
+        return $this->caseName;
     }
 
     /**
      * @return string|null
      */
-    public function getPassword(): ?string
+    public function getImgSrc(): ?string
     {
-        return $this->password;
+        return $this->imgSrc;
     }
 
     /**
      * @return int|null
      */
-    public function getIsSuper(): ?int
+    public function getType(): ?int
     {
-        return $this->isSuper;
+        return $this->type;
     }
 
     /**
@@ -245,22 +207,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

@@ -10,14 +10,14 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 后台审核记录表
+ * Class GoodsAudit
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="goods_audit")
  */
-class Admin extends Model
+class GoodsAudit extends Model
 {
     /**
      * 
@@ -29,34 +29,34 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 商品的id
+     *
+     * @Column(name="good_id", prop="goodId")
+     *
+     * @var int
+     */
+    private $goodId;
+
+    /**
+     * 商品审核结果 1：已通过 2拒绝
+     *
+     * @Column(name="res_audit", prop="resAudit")
+     *
+     * @var int
+     */
+    private $resAudit;
+
+    /**
+     * 商品审核的详细信息
      *
      * @Column()
      *
-     * @var string|null
+     * @var string
      */
-    private $name;
+    private $detail;
 
     /**
-     * 密码
-     *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
-     *
-     * @var int|null
-     */
-    private $isSuper;
-
-    /**
-     * 创建时间
+     * 创建时候的时间戳
      *
      * @Column(name="created_at", prop="createdAt")
      *
@@ -65,7 +65,7 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 更新时候的时间戳
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
@@ -74,31 +74,13 @@ class Admin extends Model
     private $updatedAt;
 
     /**
-     * 删除时间
+     * 删除时的时间戳
      *
      * @Column(name="deleted_at", prop="deletedAt")
      *
      * @var string|null
      */
     private $deletedAt;
-
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
 
 
     /**
@@ -112,33 +94,33 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param int $goodId
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setGoodId(int $goodId): void
     {
-        $this->name = $name;
+        $this->goodId = $goodId;
     }
 
     /**
-     * @param string|null $password
+     * @param int $resAudit
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setResAudit(int $resAudit): void
     {
-        $this->password = $password;
+        $this->resAudit = $resAudit;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param string $detail
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setDetail(string $detail): void
     {
-        $this->isSuper = $isSuper;
+        $this->detail = $detail;
     }
 
     /**
@@ -172,26 +154,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -200,27 +162,27 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getName(): ?string
+    public function getGoodId(): ?int
     {
-        return $this->name;
+        return $this->goodId;
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getPassword(): ?string
+    public function getResAudit(): ?int
     {
-        return $this->password;
+        return $this->resAudit;
     }
 
     /**
-     * @return int|null
+     * @return string
      */
-    public function getIsSuper(): ?int
+    public function getDetail(): ?string
     {
-        return $this->isSuper;
+        return $this->detail;
     }
 
     /**
@@ -245,22 +207,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

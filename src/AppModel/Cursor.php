@@ -11,13 +11,13 @@ use Swoft\Db\Eloquent\Model;
 
 /**
  * 
- * Class Admin
+ * Class Cursor
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="cursor")
  */
-class Admin extends Model
+class Cursor extends Model
 {
     /**
      * 
@@ -29,31 +29,40 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 图片地址
      *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $name;
-
-    /**
-     * 密码
-     *
-     * @Column(hidden=true)
+     * @Column(name="img_url", prop="imgUrl")
      *
      * @var string|null
      */
-    private $password;
+    private $imgUrl;
 
     /**
-     * 超管组
+     * 一级分类
      *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column(name="one_cat_id", prop="oneCatId")
      *
      * @var int|null
      */
-    private $isSuper;
+    private $oneCatId;
+
+    /**
+     * 排序
+     *
+     * @Column()
+     *
+     * @var int|null
+     */
+    private $sort;
+
+    /**
+     * 
+     *
+     * @Column(name="good_id", prop="goodId")
+     *
+     * @var int|null
+     */
+    private $goodId;
 
     /**
      * 创建时间
@@ -74,31 +83,13 @@ class Admin extends Model
     private $updatedAt;
 
     /**
-     * 删除时间
+     * 
      *
      * @Column(name="deleted_at", prop="deletedAt")
      *
      * @var string|null
      */
     private $deletedAt;
-
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
 
 
     /**
@@ -112,33 +103,43 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $imgUrl
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setImgUrl(?string $imgUrl): void
     {
-        $this->name = $name;
+        $this->imgUrl = $imgUrl;
     }
 
     /**
-     * @param string|null $password
+     * @param int|null $oneCatId
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setOneCatId(?int $oneCatId): void
     {
-        $this->password = $password;
+        $this->oneCatId = $oneCatId;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param int|null $sort
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setSort(?int $sort): void
     {
-        $this->isSuper = $isSuper;
+        $this->sort = $sort;
+    }
+
+    /**
+     * @param int|null $goodId
+     *
+     * @return void
+     */
+    public function setGoodId(?int $goodId): void
+    {
+        $this->goodId = $goodId;
     }
 
     /**
@@ -172,26 +173,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -202,25 +183,33 @@ class Admin extends Model
     /**
      * @return string|null
      */
-    public function getName(): ?string
+    public function getImgUrl(): ?string
     {
-        return $this->name;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPassword(): ?string
-    {
-        return $this->password;
+        return $this->imgUrl;
     }
 
     /**
      * @return int|null
      */
-    public function getIsSuper(): ?int
+    public function getOneCatId(): ?int
     {
-        return $this->isSuper;
+        return $this->oneCatId;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSort(): ?int
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getGoodId(): ?int
+    {
+        return $this->goodId;
     }
 
     /**
@@ -245,22 +234,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

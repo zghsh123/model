@@ -11,13 +11,13 @@ use Swoft\Db\Eloquent\Model;
 
 /**
  * 
- * Class Admin
+ * Class CityAdmin
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="city_admin")
  */
-class Admin extends Model
+class CityAdmin extends Model
 {
     /**
      * 
@@ -90,6 +90,24 @@ class Admin extends Model
      * @var string|null
      */
     private $sort;
+
+    /**
+     * 用户头像
+     *
+     * @Column()
+     *
+     * @var string|null
+     */
+    private $headimgurl;
+
+    /**
+     * 用户姓名
+     *
+     * @Column(name="real_name", prop="realName")
+     *
+     * @var string|null
+     */
+    private $realName;
 
     /**
      * 用户所属用户组
@@ -182,6 +200,26 @@ class Admin extends Model
     }
 
     /**
+     * @param string|null $headimgurl
+     *
+     * @return void
+     */
+    public function setHeadimgurl(?string $headimgurl): void
+    {
+        $this->headimgurl = $headimgurl;
+    }
+
+    /**
+     * @param string|null $realName
+     *
+     * @return void
+     */
+    public function setRealName(?string $realName): void
+    {
+        $this->realName = $realName;
+    }
+
+    /**
      * @param int|null $groupId
      *
      * @return void
@@ -253,6 +291,22 @@ class Admin extends Model
     public function getSort(): ?string
     {
         return $this->sort;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getHeadimgurl(): ?string
+    {
+        return $this->headimgurl;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRealName(): ?string
+    {
+        return $this->realName;
     }
 
     /**

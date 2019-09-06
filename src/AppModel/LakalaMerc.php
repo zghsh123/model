@@ -10,17 +10,17 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 拉卡拉商家表
+ * Class LakalaMerc
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="lakala_merc")
  */
-class Admin extends Model
+class LakalaMerc extends Model
 {
     /**
-     * 
+     * 主键ID
      * @Id()
      * @Column()
      *
@@ -29,31 +29,22 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 拉卡拉商家商户号
      *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $name;
-
-    /**
-     * 密码
-     *
-     * @Column(hidden=true)
+     * @Column(name="merc_id", prop="mercId")
      *
      * @var string|null
      */
-    private $password;
+    private $mercId;
 
     /**
-     * 超管组
+     * 商户的终端号
      *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column(name="term_id", prop="termId")
      *
-     * @var int|null
+     * @var string|null
      */
-    private $isSuper;
+    private $termId;
 
     /**
      * 创建时间
@@ -65,7 +56,7 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
@@ -74,31 +65,13 @@ class Admin extends Model
     private $updatedAt;
 
     /**
-     * 删除时间
+     * 
      *
      * @Column(name="deleted_at", prop="deletedAt")
      *
      * @var string|null
      */
     private $deletedAt;
-
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
 
 
     /**
@@ -112,33 +85,23 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $mercId
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setMercId(?string $mercId): void
     {
-        $this->name = $name;
+        $this->mercId = $mercId;
     }
 
     /**
-     * @param string|null $password
+     * @param string|null $termId
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setTermId(?string $termId): void
     {
-        $this->password = $password;
-    }
-
-    /**
-     * @param int|null $isSuper
-     *
-     * @return void
-     */
-    public function setIsSuper(?int $isSuper): void
-    {
-        $this->isSuper = $isSuper;
+        $this->termId = $termId;
     }
 
     /**
@@ -172,26 +135,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -202,25 +145,17 @@ class Admin extends Model
     /**
      * @return string|null
      */
-    public function getName(): ?string
+    public function getMercId(): ?string
     {
-        return $this->name;
+        return $this->mercId;
     }
 
     /**
      * @return string|null
      */
-    public function getPassword(): ?string
+    public function getTermId(): ?string
     {
-        return $this->password;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getIsSuper(): ?int
-    {
-        return $this->isSuper;
+        return $this->termId;
     }
 
     /**
@@ -245,22 +180,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

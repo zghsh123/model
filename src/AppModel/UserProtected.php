@@ -10,14 +10,14 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 受保护期记录
+ * Class UserProtected
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="user_protected")
  */
-class Admin extends Model
+class UserProtected extends Model
 {
     /**
      * 
@@ -29,31 +29,22 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 用户id
      *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $name;
-
-    /**
-     * 密码
-     *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column(name="user_id", prop="userId")
      *
      * @var int|null
      */
-    private $isSuper;
+    private $userId;
+
+    /**
+     * 虚拟上级id
+     *
+     * @Column()
+     *
+     * @var int|null
+     */
+    private $upperlevel;
 
     /**
      * 创建时间
@@ -83,22 +74,13 @@ class Admin extends Model
     private $deletedAt;
 
     /**
-     * 排序
+     * 关闭时间
      *
-     * @Column()
+     * @Column(name="close_time", prop="closeTime")
      *
      * @var string|null
      */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
+    private $closeTime;
 
 
     /**
@@ -112,33 +94,23 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param int|null $userId
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setUserId(?int $userId): void
     {
-        $this->name = $name;
+        $this->userId = $userId;
     }
 
     /**
-     * @param string|null $password
+     * @param int|null $upperlevel
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setUpperlevel(?int $upperlevel): void
     {
-        $this->password = $password;
-    }
-
-    /**
-     * @param int|null $isSuper
-     *
-     * @return void
-     */
-    public function setIsSuper(?int $isSuper): void
-    {
-        $this->isSuper = $isSuper;
+        $this->upperlevel = $upperlevel;
     }
 
     /**
@@ -172,23 +144,13 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
+     * @param string|null $closeTime
      *
      * @return void
      */
-    public function setSort(?string $sort): void
+    public function setCloseTime(?string $closeTime): void
     {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
+        $this->closeTime = $closeTime;
     }
 
     /**
@@ -200,27 +162,19 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getName(): ?string
+    public function getUserId(): ?int
     {
-        return $this->name;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPassword(): ?string
-    {
-        return $this->password;
+        return $this->userId;
     }
 
     /**
      * @return int|null
      */
-    public function getIsSuper(): ?int
+    public function getUpperlevel(): ?int
     {
-        return $this->isSuper;
+        return $this->upperlevel;
     }
 
     /**
@@ -250,17 +204,9 @@ class Admin extends Model
     /**
      * @return string|null
      */
-    public function getSort(): ?string
+    public function getCloseTime(): ?string
     {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
+        return $this->closeTime;
     }
 
 }

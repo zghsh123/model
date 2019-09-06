@@ -10,14 +10,14 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 商品——优惠券关系表
+ * Class CouponGoods
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="coupon_goods")
  */
-class Admin extends Model
+class CouponGoods extends Model
 {
     /**
      * 
@@ -29,31 +29,22 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 商品id
      *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $name;
-
-    /**
-     * 密码
-     *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column(name="good_id", prop="goodId")
      *
      * @var int|null
      */
-    private $isSuper;
+    private $goodId;
+
+    /**
+     * 优惠券id
+     *
+     * @Column(name="coupon_id", prop="couponId")
+     *
+     * @var int|null
+     */
+    private $couponId;
 
     /**
      * 创建时间
@@ -82,24 +73,6 @@ class Admin extends Model
      */
     private $deletedAt;
 
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
-
 
     /**
      * @param int $id
@@ -112,33 +85,23 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param int|null $goodId
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setGoodId(?int $goodId): void
     {
-        $this->name = $name;
+        $this->goodId = $goodId;
     }
 
     /**
-     * @param string|null $password
+     * @param int|null $couponId
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setCouponId(?int $couponId): void
     {
-        $this->password = $password;
-    }
-
-    /**
-     * @param int|null $isSuper
-     *
-     * @return void
-     */
-    public function setIsSuper(?int $isSuper): void
-    {
-        $this->isSuper = $isSuper;
+        $this->couponId = $couponId;
     }
 
     /**
@@ -172,26 +135,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -200,27 +143,19 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getName(): ?string
+    public function getGoodId(): ?int
     {
-        return $this->name;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPassword(): ?string
-    {
-        return $this->password;
+        return $this->goodId;
     }
 
     /**
      * @return int|null
      */
-    public function getIsSuper(): ?int
+    public function getCouponId(): ?int
     {
-        return $this->isSuper;
+        return $this->couponId;
     }
 
     /**
@@ -245,22 +180,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

@@ -10,14 +10,14 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 商品-sku表
+ * Class GoodsSku
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="goods_sku")
  */
-class Admin extends Model
+class GoodsSku extends Model
 {
     /**
      * 
@@ -29,7 +29,7 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 最小库存单位(商品属性)
      *
      * @Column()
      *
@@ -38,25 +38,25 @@ class Admin extends Model
     private $name;
 
     /**
-     * 密码
+     * sku_type ID
      *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column(name="sku_type_id", prop="skuTypeId")
      *
      * @var int|null
      */
-    private $isSuper;
+    private $skuTypeId;
 
     /**
-     * 创建时间
+     * 商品 ID
+     *
+     * @Column(name="goods_id", prop="goodsId")
+     *
+     * @var int|null
+     */
+    private $goodsId;
+
+    /**
+     * 
      *
      * @Column(name="created_at", prop="createdAt")
      *
@@ -65,40 +65,13 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
      * @var string|null
      */
     private $updatedAt;
-
-    /**
-     * 删除时间
-     *
-     * @Column(name="deleted_at", prop="deletedAt")
-     *
-     * @var string|null
-     */
-    private $deletedAt;
-
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
 
 
     /**
@@ -122,23 +95,23 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $password
+     * @param int|null $skuTypeId
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setSkuTypeId(?int $skuTypeId): void
     {
-        $this->password = $password;
+        $this->skuTypeId = $skuTypeId;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param int|null $goodsId
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setGoodsId(?int $goodsId): void
     {
-        $this->isSuper = $isSuper;
+        $this->goodsId = $goodsId;
     }
 
     /**
@@ -162,36 +135,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $deletedAt
-     *
-     * @return void
-     */
-    public function setDeletedAt(?string $deletedAt): void
-    {
-        $this->deletedAt = $deletedAt;
-    }
-
-    /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -208,19 +151,19 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getPassword(): ?string
+    public function getSkuTypeId(): ?int
     {
-        return $this->password;
+        return $this->skuTypeId;
     }
 
     /**
      * @return int|null
      */
-    public function getIsSuper(): ?int
+    public function getGoodsId(): ?int
     {
-        return $this->isSuper;
+        return $this->goodsId;
     }
 
     /**
@@ -237,30 +180,6 @@ class Admin extends Model
     public function getUpdatedAt(): ?string
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDeletedAt(): ?string
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

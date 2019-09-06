@@ -11,13 +11,13 @@ use Swoft\Db\Eloquent\Model;
 
 /**
  * 
- * Class Admin
+ * Class GoodWriteCode
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="good_write_code")
  */
-class Admin extends Model
+class GoodWriteCode extends Model
 {
     /**
      * 
@@ -29,34 +29,25 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 商品id
      *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $name;
-
-    /**
-     * 密码
-     *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column(name="good_id", prop="goodId")
      *
      * @var int|null
      */
-    private $isSuper;
+    private $goodId;
 
     /**
-     * 创建时间
+     * 发码
+     *
+     * @Column()
+     *
+     * @var int|null
+     */
+    private $code;
+
+    /**
+     * 
      *
      * @Column(name="created_at", prop="createdAt")
      *
@@ -65,7 +56,7 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
@@ -74,31 +65,13 @@ class Admin extends Model
     private $updatedAt;
 
     /**
-     * 删除时间
+     * 
      *
      * @Column(name="deleted_at", prop="deletedAt")
      *
      * @var string|null
      */
     private $deletedAt;
-
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
 
 
     /**
@@ -112,33 +85,23 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param int|null $goodId
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setGoodId(?int $goodId): void
     {
-        $this->name = $name;
+        $this->goodId = $goodId;
     }
 
     /**
-     * @param string|null $password
+     * @param int|null $code
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setCode(?int $code): void
     {
-        $this->password = $password;
-    }
-
-    /**
-     * @param int|null $isSuper
-     *
-     * @return void
-     */
-    public function setIsSuper(?int $isSuper): void
-    {
-        $this->isSuper = $isSuper;
+        $this->code = $code;
     }
 
     /**
@@ -172,26 +135,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -200,27 +143,19 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getName(): ?string
+    public function getGoodId(): ?int
     {
-        return $this->name;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPassword(): ?string
-    {
-        return $this->password;
+        return $this->goodId;
     }
 
     /**
      * @return int|null
      */
-    public function getIsSuper(): ?int
+    public function getCode(): ?int
     {
-        return $this->isSuper;
+        return $this->code;
     }
 
     /**
@@ -245,22 +180,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

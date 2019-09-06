@@ -11,16 +11,16 @@ use Swoft\Db\Eloquent\Model;
 
 /**
  * 
- * Class Admin
+ * Class CityAuthGroup
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="city_auth_group")
  */
-class Admin extends Model
+class CityAuthGroup extends Model
 {
     /**
-     * 
+     * 主键ID
      * @Id()
      * @Column()
      *
@@ -29,34 +29,34 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 用户组的中文名称
+     *
+     * @Column()
+     *
+     * @var string
+     */
+    private $title;
+
+    /**
+     * 状态 0:禁用 1:启用
+     *
+     * @Column()
+     *
+     * @var int
+     */
+    private $status;
+
+    /**
+     * 用户组所拥有的权限 多个规则使用 逗号隔开 1，2，3
      *
      * @Column()
      *
      * @var string|null
      */
-    private $name;
+    private $rules;
 
     /**
-     * 密码
-     *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
-     *
-     * @var int|null
-     */
-    private $isSuper;
-
-    /**
-     * 创建时间
+     * 用户组创建的时间
      *
      * @Column(name="created_at", prop="createdAt")
      *
@@ -65,7 +65,7 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 用户组更新的时间
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
@@ -74,7 +74,7 @@ class Admin extends Model
     private $updatedAt;
 
     /**
-     * 删除时间
+     * 用户组删除的时间
      *
      * @Column(name="deleted_at", prop="deletedAt")
      *
@@ -83,22 +83,13 @@ class Admin extends Model
     private $deletedAt;
 
     /**
-     * 排序
+     * 用户组的描述
      *
      * @Column()
      *
      * @var string|null
      */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
+    private $remark;
 
 
     /**
@@ -112,33 +103,33 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param string $title
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setTitle(string $title): void
     {
-        $this->name = $name;
+        $this->title = $title;
     }
 
     /**
-     * @param string|null $password
+     * @param int $status
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setStatus(int $status): void
     {
-        $this->password = $password;
+        $this->status = $status;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param string|null $rules
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setRules(?string $rules): void
     {
-        $this->isSuper = $isSuper;
+        $this->rules = $rules;
     }
 
     /**
@@ -172,23 +163,13 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
+     * @param string|null $remark
      *
      * @return void
      */
-    public function setSort(?string $sort): void
+    public function setRemark(?string $remark): void
     {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
+        $this->remark = $remark;
     }
 
     /**
@@ -200,27 +181,27 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): ?int
+    {
+        return $this->status;
     }
 
     /**
      * @return string|null
      */
-    public function getPassword(): ?string
+    public function getRules(): ?string
     {
-        return $this->password;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getIsSuper(): ?int
-    {
-        return $this->isSuper;
+        return $this->rules;
     }
 
     /**
@@ -250,17 +231,9 @@ class Admin extends Model
     /**
      * @return string|null
      */
-    public function getSort(): ?string
+    public function getRemark(): ?string
     {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
+        return $this->remark;
     }
 
 }

@@ -10,14 +10,14 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 商户登录表
+ * Class Member
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="member")
  */
-class Admin extends Model
+class Member extends Model
 {
     /**
      * 
@@ -29,7 +29,7 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 
      *
      * @Column()
      *
@@ -38,7 +38,7 @@ class Admin extends Model
     private $name;
 
     /**
-     * 密码
+     * 
      *
      * @Column(hidden=true)
      *
@@ -47,16 +47,25 @@ class Admin extends Model
     private $password;
 
     /**
-     * 超管组
+     * 
      *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column()
      *
-     * @var int|null
+     * @var string|null
      */
-    private $isSuper;
+    private $email;
 
     /**
-     * 创建时间
+     * 真实名称
+     *
+     * @Column(name="real_name", prop="realName")
+     *
+     * @var string|null
+     */
+    private $realName;
+
+    /**
+     * 
      *
      * @Column(name="created_at", prop="createdAt")
      *
@@ -65,7 +74,7 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
@@ -74,7 +83,7 @@ class Admin extends Model
     private $updatedAt;
 
     /**
-     * 删除时间
+     * 
      *
      * @Column(name="deleted_at", prop="deletedAt")
      *
@@ -83,22 +92,31 @@ class Admin extends Model
     private $deletedAt;
 
     /**
-     * 排序
+     * 
      *
      * @Column()
      *
      * @var string|null
      */
-    private $sort;
+    private $headimgurl;
 
     /**
-     * 用户所属用户组
+     * 
      *
-     * @Column(name="group_id", prop="groupId")
+     * @Column(name="city_id", prop="cityId")
      *
      * @var int|null
      */
-    private $groupId;
+    private $cityId;
+
+    /**
+     * 0 1
+     *
+     * @Column()
+     *
+     * @var int|null
+     */
+    private $type;
 
 
     /**
@@ -132,13 +150,23 @@ class Admin extends Model
     }
 
     /**
-     * @param int|null $isSuper
+     * @param string|null $email
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setEmail(?string $email): void
     {
-        $this->isSuper = $isSuper;
+        $this->email = $email;
+    }
+
+    /**
+     * @param string|null $realName
+     *
+     * @return void
+     */
+    public function setRealName(?string $realName): void
+    {
+        $this->realName = $realName;
     }
 
     /**
@@ -172,23 +200,33 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
+     * @param string|null $headimgurl
      *
      * @return void
      */
-    public function setSort(?string $sort): void
+    public function setHeadimgurl(?string $headimgurl): void
     {
-        $this->sort = $sort;
+        $this->headimgurl = $headimgurl;
     }
 
     /**
-     * @param int|null $groupId
+     * @param int|null $cityId
      *
      * @return void
      */
-    public function setGroupId(?int $groupId): void
+    public function setCityId(?int $cityId): void
     {
-        $this->groupId = $groupId;
+        $this->cityId = $cityId;
+    }
+
+    /**
+     * @param int|null $type
+     *
+     * @return void
+     */
+    public function setType(?int $type): void
+    {
+        $this->type = $type;
     }
 
     /**
@@ -216,11 +254,19 @@ class Admin extends Model
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getIsSuper(): ?int
+    public function getEmail(): ?string
     {
-        return $this->isSuper;
+        return $this->email;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRealName(): ?string
+    {
+        return $this->realName;
     }
 
     /**
@@ -250,17 +296,25 @@ class Admin extends Model
     /**
      * @return string|null
      */
-    public function getSort(): ?string
+    public function getHeadimgurl(): ?string
     {
-        return $this->sort;
+        return $this->headimgurl;
     }
 
     /**
      * @return int|null
      */
-    public function getGroupId(): ?int
+    public function getCityId(): ?int
     {
-        return $this->groupId;
+        return $this->cityId;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getType(): ?int
+    {
+        return $this->type;
     }
 
 }

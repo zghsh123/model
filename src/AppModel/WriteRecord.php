@@ -10,17 +10,17 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 商品核销记录
+ * Class WriteRecord
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="write_record")
  */
-class Admin extends Model
+class WriteRecord extends Model
 {
     /**
-     * 
+     * 核销记录id
      * @Id()
      * @Column()
      *
@@ -29,31 +29,40 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 订单商品id
      *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $name;
-
-    /**
-     * 密码
-     *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
+     * @Column(name="order_good_id", prop="orderGoodId")
      *
      * @var int|null
      */
-    private $isSuper;
+    private $orderGoodId;
+
+    /**
+     * 订单已审核张数
+     *
+     * @Column(name="order_write_num", prop="orderWriteNum")
+     *
+     * @var int|null
+     */
+    private $orderWriteNum;
+
+    /**
+     * 订单剩余张数
+     *
+     * @Column(name="order_wait_num", prop="orderWaitNum")
+     *
+     * @var int|null
+     */
+    private $orderWaitNum;
+
+    /**
+     * 核销时间
+     *
+     * @Column(name="write_time", prop="writeTime")
+     *
+     * @var string|null
+     */
+    private $writeTime;
 
     /**
      * 创建时间
@@ -82,24 +91,6 @@ class Admin extends Model
      */
     private $deletedAt;
 
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
-
 
     /**
      * @param int $id
@@ -112,33 +103,43 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param int|null $orderGoodId
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setOrderGoodId(?int $orderGoodId): void
     {
-        $this->name = $name;
+        $this->orderGoodId = $orderGoodId;
     }
 
     /**
-     * @param string|null $password
+     * @param int|null $orderWriteNum
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setOrderWriteNum(?int $orderWriteNum): void
     {
-        $this->password = $password;
+        $this->orderWriteNum = $orderWriteNum;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param int|null $orderWaitNum
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setOrderWaitNum(?int $orderWaitNum): void
     {
-        $this->isSuper = $isSuper;
+        $this->orderWaitNum = $orderWaitNum;
+    }
+
+    /**
+     * @param string|null $writeTime
+     *
+     * @return void
+     */
+    public function setWriteTime(?string $writeTime): void
+    {
+        $this->writeTime = $writeTime;
     }
 
     /**
@@ -172,26 +173,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -200,27 +181,35 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getName(): ?string
+    public function getOrderGoodId(): ?int
     {
-        return $this->name;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPassword(): ?string
-    {
-        return $this->password;
+        return $this->orderGoodId;
     }
 
     /**
      * @return int|null
      */
-    public function getIsSuper(): ?int
+    public function getOrderWriteNum(): ?int
     {
-        return $this->isSuper;
+        return $this->orderWriteNum;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getOrderWaitNum(): ?int
+    {
+        return $this->orderWaitNum;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getWriteTime(): ?string
+    {
+        return $this->writeTime;
     }
 
     /**
@@ -245,22 +234,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }

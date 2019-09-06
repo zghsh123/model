@@ -10,14 +10,14 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 核销登录
+ * Class Scenic
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="scenic")
  */
-class Admin extends Model
+class Scenic extends Model
 {
     /**
      * 
@@ -29,31 +29,31 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 景点名称
+     *
+     * @Column(name="scenic_name", prop="scenicName")
+     *
+     * @var string|null
+     */
+    private $scenicName;
+
+    /**
+     * 用户名称
      *
      * @Column()
      *
      * @var string|null
      */
-    private $name;
+    private $username;
 
     /**
-     * 密码
+     * 用户密码
      *
      * @Column(hidden=true)
      *
      * @var string|null
      */
     private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
-     *
-     * @var int|null
-     */
-    private $isSuper;
 
     /**
      * 创建时间
@@ -65,7 +65,7 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
@@ -83,22 +83,13 @@ class Admin extends Model
     private $deletedAt;
 
     /**
-     * 排序
+     * 
      *
      * @Column()
      *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
      * @var int|null
      */
-    private $groupId;
+    private $type;
 
 
     /**
@@ -112,13 +103,23 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param string|null $scenicName
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setScenicName(?string $scenicName): void
     {
-        $this->name = $name;
+        $this->scenicName = $scenicName;
+    }
+
+    /**
+     * @param string|null $username
+     *
+     * @return void
+     */
+    public function setUsername(?string $username): void
+    {
+        $this->username = $username;
     }
 
     /**
@@ -129,16 +130,6 @@ class Admin extends Model
     public function setPassword(?string $password): void
     {
         $this->password = $password;
-    }
-
-    /**
-     * @param int|null $isSuper
-     *
-     * @return void
-     */
-    public function setIsSuper(?int $isSuper): void
-    {
-        $this->isSuper = $isSuper;
     }
 
     /**
@@ -172,23 +163,13 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
+     * @param int|null $type
      *
      * @return void
      */
-    public function setSort(?string $sort): void
+    public function setType(?int $type): void
     {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
+        $this->type = $type;
     }
 
     /**
@@ -202,9 +183,17 @@ class Admin extends Model
     /**
      * @return string|null
      */
-    public function getName(): ?string
+    public function getScenicName(): ?string
     {
-        return $this->name;
+        return $this->scenicName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUsername(): ?string
+    {
+        return $this->username;
     }
 
     /**
@@ -213,14 +202,6 @@ class Admin extends Model
     public function getPassword(): ?string
     {
         return $this->password;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getIsSuper(): ?int
-    {
-        return $this->isSuper;
     }
 
     /**
@@ -248,19 +229,11 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
      * @return int|null
      */
-    public function getGroupId(): ?int
+    public function getType(): ?int
     {
-        return $this->groupId;
+        return $this->type;
     }
 
 }

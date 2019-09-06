@@ -10,17 +10,17 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- * 
- * Class Admin
+ * 购物车
+ * Class Cart
  *
  * @since 2.0
  *
- * @Entity(table="admin")
+ * @Entity(table="cart")
  */
-class Admin extends Model
+class Cart extends Model
 {
     /**
-     * 
+     * 商品id
      * @Id()
      * @Column()
      *
@@ -29,34 +29,43 @@ class Admin extends Model
     private $id;
 
     /**
-     * 账号
+     * 商品id
      *
-     * @Column()
+     * @Column(name="user_id", prop="userId")
+     *
+     * @var int
+     */
+    private $userId;
+
+    /**
+     * 
+     *
+     * @Column(name="goods_id", prop="goodsId")
+     *
+     * @var int
+     */
+    private $goodsId;
+
+    /**
+     * 
+     *
+     * @Column(name="goods_num", prop="goodsNum")
+     *
+     * @var int
+     */
+    private $goodsNum;
+
+    /**
+     * 商品sku的笛卡尔积
+     *
+     * @Column(name="sku_index", prop="skuIndex")
      *
      * @var string|null
      */
-    private $name;
+    private $skuIndex;
 
     /**
-     * 密码
-     *
-     * @Column(hidden=true)
-     *
-     * @var string|null
-     */
-    private $password;
-
-    /**
-     * 超管组
-     *
-     * @Column(name="is_super", prop="isSuper")
-     *
-     * @var int|null
-     */
-    private $isSuper;
-
-    /**
-     * 创建时间
+     * 
      *
      * @Column(name="created_at", prop="createdAt")
      *
@@ -65,7 +74,7 @@ class Admin extends Model
     private $createdAt;
 
     /**
-     * 更新时间
+     * 
      *
      * @Column(name="updated_at", prop="updatedAt")
      *
@@ -74,31 +83,13 @@ class Admin extends Model
     private $updatedAt;
 
     /**
-     * 删除时间
+     * 
      *
      * @Column(name="deleted_at", prop="deletedAt")
      *
      * @var string|null
      */
     private $deletedAt;
-
-    /**
-     * 排序
-     *
-     * @Column()
-     *
-     * @var string|null
-     */
-    private $sort;
-
-    /**
-     * 用户所属用户组
-     *
-     * @Column(name="group_id", prop="groupId")
-     *
-     * @var int|null
-     */
-    private $groupId;
 
 
     /**
@@ -112,33 +103,43 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $name
+     * @param int $userId
      *
      * @return void
      */
-    public function setName(?string $name): void
+    public function setUserId(int $userId): void
     {
-        $this->name = $name;
+        $this->userId = $userId;
     }
 
     /**
-     * @param string|null $password
+     * @param int $goodsId
      *
      * @return void
      */
-    public function setPassword(?string $password): void
+    public function setGoodsId(int $goodsId): void
     {
-        $this->password = $password;
+        $this->goodsId = $goodsId;
     }
 
     /**
-     * @param int|null $isSuper
+     * @param int $goodsNum
      *
      * @return void
      */
-    public function setIsSuper(?int $isSuper): void
+    public function setGoodsNum(int $goodsNum): void
     {
-        $this->isSuper = $isSuper;
+        $this->goodsNum = $goodsNum;
+    }
+
+    /**
+     * @param string|null $skuIndex
+     *
+     * @return void
+     */
+    public function setSkuIndex(?string $skuIndex): void
+    {
+        $this->skuIndex = $skuIndex;
     }
 
     /**
@@ -172,26 +173,6 @@ class Admin extends Model
     }
 
     /**
-     * @param string|null $sort
-     *
-     * @return void
-     */
-    public function setSort(?string $sort): void
-    {
-        $this->sort = $sort;
-    }
-
-    /**
-     * @param int|null $groupId
-     *
-     * @return void
-     */
-    public function setGroupId(?int $groupId): void
-    {
-        $this->groupId = $groupId;
-    }
-
-    /**
      * @return int
      */
     public function getId(): ?int
@@ -200,27 +181,35 @@ class Admin extends Model
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getName(): ?string
+    public function getUserId(): ?int
     {
-        return $this->name;
+        return $this->userId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGoodsId(): ?int
+    {
+        return $this->goodsId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGoodsNum(): ?int
+    {
+        return $this->goodsNum;
     }
 
     /**
      * @return string|null
      */
-    public function getPassword(): ?string
+    public function getSkuIndex(): ?string
     {
-        return $this->password;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getIsSuper(): ?int
-    {
-        return $this->isSuper;
+        return $this->skuIndex;
     }
 
     /**
@@ -245,22 +234,6 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSort(): ?string
-    {
-        return $this->sort;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGroupId(): ?int
-    {
-        return $this->groupId;
     }
 
 }
