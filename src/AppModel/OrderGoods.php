@@ -20,6 +20,12 @@ use Swoft\Db\Eloquent\Model;
 class OrderGoods extends Model
 {
     /**
+     * Whether the model is automatically maintained with a timestamp
+     *
+     * @var bool
+     */
+    protected $modelTimestamps = false;
+    /**
      * 
      * @Id()
      * @Column()
