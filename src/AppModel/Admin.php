@@ -12,8 +12,7 @@ use Swoft\Db\Eloquent\Model;
 /**
  *
  * Class Admin
- * php bin/swoft entity:create order_goods --path=@app/Models/Entity --field_prefix=hsh_
- * php bin/swoft entity:create goods_img --path=@app/Models/Entity --field_prefix=hsh_
+ *
  * @since 2.0
  *
  * @Entity(table="admin")
@@ -41,11 +40,20 @@ class Admin extends Model
     /**
      * 密码
      *
-     * @Column(hidden=true)
+     * @Column(hidden=false)
      *
      * @var string|null
      */
     private $password;
+
+    /**
+     * 超管组
+     *
+     * @Column(name="is_super", prop="isSuper")
+     *
+     * @var int|null
+     */
+    private $isSuper;
 
     /**
      * 创建时间
@@ -73,6 +81,24 @@ class Admin extends Model
      * @var string|null
      */
     private $deletedAt;
+
+    /**
+     * 排序
+     *
+     * @Column()
+     *
+     * @var string|null
+     */
+    private $sort;
+
+    /**
+     * 用户所属用户组
+     *
+     * @Column(name="group_id", prop="groupId")
+     *
+     * @var int|null
+     */
+    private $groupId;
 
 
     /**
@@ -106,6 +132,16 @@ class Admin extends Model
     }
 
     /**
+     * @param int|null $isSuper
+     *
+     * @return void
+     */
+    public function setIsSuper(?int $isSuper): void
+    {
+        $this->isSuper = $isSuper;
+    }
+
+    /**
      * @param string|null $createdAt
      *
      * @return void
@@ -136,6 +172,26 @@ class Admin extends Model
     }
 
     /**
+     * @param string|null $sort
+     *
+     * @return void
+     */
+    public function setSort(?string $sort): void
+    {
+        $this->sort = $sort;
+    }
+
+    /**
+     * @param int|null $groupId
+     *
+     * @return void
+     */
+    public function setGroupId(?int $groupId): void
+    {
+        $this->groupId = $groupId;
+    }
+
+    /**
      * @return int
      */
     public function getId(): ?int
@@ -160,6 +216,14 @@ class Admin extends Model
     }
 
     /**
+     * @return int|null
+     */
+    public function getIsSuper(): ?int
+    {
+        return $this->isSuper;
+    }
+
+    /**
      * @return string|null
      */
     public function getCreatedAt(): ?string
@@ -181,6 +245,22 @@ class Admin extends Model
     public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSort(): ?string
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getGroupId(): ?int
+    {
+        return $this->groupId;
     }
 
 }
