@@ -1,0 +1,21 @@
+{
+  "name": "hsh/hsh_model",
+  "description": "惠生活的接口文件大全",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "冯邯城",
+      "email": "3081089511@qq.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\Models\\Entity": "src/AppModel"
+    }
+  }
+}
